@@ -46,7 +46,7 @@ Response body:
 This api allows you to make a new move on a started game. Make sure that the value of **__tokenGame_** taken from the **/start API**
 
 **Request must have the following parameters:**
-- _tokenGame : string - uiniqid
+- _tokenGame : string - uniqid
 - player : integer, allowed values 1 - 2
 - symbol : string, allowed values X - 0
 - row : integer, allowed values 0 -1 - 2
@@ -143,7 +143,7 @@ Below you can find the API response in case of a service error :
 This service allows you to finish a game earlier.  Make sure that the value of **__tokenGame_** taken from the **/start API**
 
 **Request must have the following parameters:**
-- _tokenGame : string - uiniqid
+- _tokenGame : string - uniqid
 
 _**curl example**:_
 ```bash
