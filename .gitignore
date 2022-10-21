@@ -3,4 +3,6 @@ Homestead.json
 Homestead.yaml
 .phpunit.result.cache
 /storage/logs
+/storage/framework
 .editorconfig
+/docker/my-db
