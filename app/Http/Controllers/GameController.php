@@ -58,7 +58,7 @@ class GameController extends Controller
         //Check if game token id exists
         $game_exists = Game::where('game_token', $request->input('_tokenGame'))->get()->first();
 
-        //Error Exception for invalid token
+        //Error invalid token
         if(!$game_exists) {
             return response()->json([
                 'success'   => false,
@@ -78,7 +78,7 @@ class GameController extends Controller
         $game = Game::find($game_exists->id);
 
         //First move : new game
-        if(is_null($game_exists->last_player) && is_null($game_exists->last_symbol)) {
+        if(is_null($game_exists->last_player) && is_null($game_exists->last_symbol) && $game->ended == 0) {
             $new_game = true;
             $actual_grid = Game::getEmptyGrid();
         } else {
@@ -163,6 +163,43 @@ class GameController extends Controller
         $game->save();
 
         return response()->json($response, 200);
+    }
+
+    /**
+     * End a game from a given token
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return json $response
+     */
+    public function end(Request $request) {
+        //Validation rules
+        //API expects that payload has the parameters that are specified
+        $this->validate($request, [
+            '_tokenGame' => 'required',
+        ], [
+            'required'  => 'The attribute :attribute is required'
+        ]);
+
+        //Check if game token id exists
+        $game_exists = Game::where('game_token', $request->input('_tokenGame'))->get()->first();
+
+        //Error for invalid token
+        if(!$game_exists) {
+            return response()->json([
+                'success'   => false,
+                'error'     => 'Invalid game token'
+            ], 500);
+        }
+
+        //Getting Eloquent Object Game
+        $game = Game::find($game_exists->id);
+        $game->ended = 1;
+        $game->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Game successfully ended'
+        ], 200);
     }
 
     /**

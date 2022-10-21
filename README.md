@@ -139,4 +139,21 @@ Below you can find the API response in case of a service error :
     "error": "Field is already used"
 }
 ```
+###### **POST /end**
+This service allows you to finish a game earlier.  Make sure that the value of **__tokenGame_** taken from the **/start API**
 
+**Request must have the following parameters:**
+- _tokenGame : string - uiniqid
+
+_**curl example**:_
+```bash
+curl --location --request POST 'http://localhost:8000/end?_tokenGame=635295a510c79'
+```
+
+**Response body:**
+```json
+{
+    "success": false,
+    "message": "Game successfully ended"
+}
+```

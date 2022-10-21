@@ -18,3 +18,4 @@
  */
 $router->get('/start', 'GameController@start');
 $router->post('/move', 'GameController@move');
+$router->post('/end', 'GameController@end');
