@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `games`;
 CREATE TABLE `games` (
   `id` int NOT NULL AUTO_INCREMENT,
   `game_token` varchar(13) NOT NULL,
-  `last_user` int NULL,
+  `last_player` int NULL,
   `last_symbol` varchar(2) NULL,
   `grid` varchar(500) NULL DEFAULT '',
   `created_at` datetime DEFAULT NULL,
