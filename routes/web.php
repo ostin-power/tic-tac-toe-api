@@ -13,13 +13,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
 /**
- * Tic Tac Toe Simple Api
+ * Tic Tac Toe Api
  */
 $router->get('/start', 'GameController@start');
 $router->post('/move', 'GameController@move');
-$router->post('/reset/{game}', 'GameController@reset');
