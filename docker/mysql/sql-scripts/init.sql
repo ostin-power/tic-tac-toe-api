@@ -38,6 +38,8 @@ CREATE TABLE `games` (
   `last_player` int NULL,
   `last_symbol` varchar(2) NULL,
   `grid` varchar(500) NULL DEFAULT '',
+  `move_count` int NULL,
+  `ended` bit NULL DEFAULT 0,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

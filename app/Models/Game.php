@@ -27,14 +27,14 @@ class Game extends Model {
      * @var string[]
      */
     protected $fillable = [
-        'game_token', 'last_user', 'last_symbol', 'grid', 'created_at', 'updated_at'
+        'game_token', 'last_player', 'last_symbol', 'grid', 'move_count', 'ended', 'created_at', 'updated_at'
     ];
 
-
-    public $grid = [
-        ['','',''],
-        ['','',''],
-        ['','','']
-    ];
-
+    public static function getEmptyGrid() {
+        return [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ];
+    }
 }
