@@ -9,8 +9,6 @@ services:
       - '9000'
     volumes:
       - .:/var/www/html/
-    depends_on:
-      - mongodb
   nginx:
     container_name: tic_tac_toe_nginx
     image: nginx:stable-alpine
@@ -42,8 +40,6 @@ services:
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
     volumes:
-
-        #- ./docker/mysql/sql-scripts/:/docker-entrypoint-initdb.d/:rw
         - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
         - ./docker/my-db:/var/lib/mysql/:rw
         - ./docker/mysql/sql-scripts/init.sql:/docker-entrypoint-initdb.d/1-init.sql
