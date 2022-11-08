@@ -139,6 +139,53 @@ Below you can find the API response in case of a service error :
     "error": "Field is already used"
 }
 ```
+
+
+###### **GET /gamedata/{token}**
+This api allows you to specific game information. 
+
+_**curl example**:_
+```bash
+curl --location --request GET 'http://localhost:8000/gamedata/636ab00d4ea2c'
+```
+Response body:
+```json
+{
+    "success": true,
+    "win": false,
+    "end": 1,
+    "game_grid": [
+		[ "0",  "",  "0"],
+        [ "",  "",  "X"],
+		[ "X",  "0",  ""],
+	]
+    "message": "Player X makes the next move"
+}
+```
+
+Response body in case of ended game:
+```json
+{
+    "success": true,
+    "win": true,
+    "end": 1,
+    "game_grid": [
+		[ "0",  "X",  "0"],
+        [ "X",  "X",  "X"],
+		[ "0",  "0",  "0"],
+	]
+    "message": "Game finished"
+}
+```
+
+Response body in case of unexisting game:
+```json
+{
+    "success": false,
+    "message": "Invalid game token"
+}
+```
+
 ###### **POST /end**
 This service allows you to finish a game earlier.  Make sure that the value of **__tokenGame_** taken from the **/start API**
 
@@ -153,7 +200,7 @@ curl --location --request POST 'http://localhost:8000/end?_tokenGame=635295a510c
 **Response body:**
 ```json
 {
-    "success": false,
+    "success": true,
     "message": "Game successfully ended"
 }
 ```

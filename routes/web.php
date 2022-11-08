@@ -17,5 +17,6 @@
  * Tic Tac Toe Api
  */
 $router->get('/start', 'GameController@start');
+$router->get('/gamedata/{id}', 'GameController@gamedata');
 $router->post('/move', 'GameController@move');
 $router->post('/end', 'GameController@end');

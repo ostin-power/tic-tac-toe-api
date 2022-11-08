@@ -247,4 +247,36 @@ class GameController extends Controller
         }
         return $count == $field;
     }
+
+    /**
+     * Returns data of an existing game
+     * Ended or not
+     *
+     * @param string $id
+     * @return json $response
+     */
+    public function gamedata($id) {
+        //Check if game token id exists
+        $game_exists = Game::where('game_token', $id)->get()->first();
+
+        //Error invalid token
+        if(!$game_exists) {
+            return response()->json([
+                'success'   => false,
+                'error'     => 'Invalid game token'
+            ], 404);
+        }
+
+        //Getting game grid
+        $grid = strlen($game_exists->grid) > 0 ? json_decode($game_exists->grid) : Game::getEmptyGrid();
+        $next_player = $game_exists->last_player == 1 ? 2 : 1;
+
+        return response()->json([
+            'success'       => true,
+            'win'           => $game_exists->ended ? true : false,
+            'end'           => $next_player,
+            'game_grid'     => $grid,
+            'message'       => $game_exists->ended ? 'Game finished' : 'Player '.$next_player.' makes the next move'
+        ], 200);
+    }
 }
